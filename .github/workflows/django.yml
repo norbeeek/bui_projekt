@@ -28,6 +28,4 @@ jobs:
     - name: Run Django-based tests
       run: |
         python crm1_v14_registration_login/manage.py test
-    - name: Run Django server
-      run: |
-        python crm1_v14_registration_login/manage.py runserver
+   
