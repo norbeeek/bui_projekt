@@ -1,1 +1,1 @@
-web: gunicorn crm1_v14_registration_login.crm1.wsgi
+web: gunicorn crm1_v14_registration_login.wsgi
