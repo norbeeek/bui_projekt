@@ -31,6 +31,9 @@ jobs:
     - name: Export ENV Var
       run: |
         export CODACY_PROJECT_TOKEN=${{secrets.CODACY_PROJECT_TOKEN}}
+    - name: Upload to Codacy
+      run: |
+        /bin/bash crm1_v14_registration_login/codacy.sh
   
   
   security: #second job - snyk scanning
