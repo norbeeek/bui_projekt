@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Django-based tests
       run: |
-        python crm1_v14_registration_login/manage.py test tests/
+        python crm1_v14_registration_login/manage.py test crm1_v14_registration_login/tests/
     - name: Export ENV Var
       run: |
         export CODACY_PROJECT_TOKEN=${{secrets.CODACY_PROJECT_TOKEN}}
