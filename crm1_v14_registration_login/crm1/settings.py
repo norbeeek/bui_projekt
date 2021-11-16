@@ -25,7 +25,7 @@ SECRET_KEY = 'cz=&%f*9(d*zo$_55p=(p)(eki#p$pb^0159-)8k^6$9c3l&_b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bui-projekt.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['bui-projekt.herokuapp.com']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',
-    'social_django',
 
     'django_filters',
 ]
@@ -52,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'crm1.urls'
@@ -68,14 +66,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
-#WSGI_APPLICATION = 'crm1.wsgi.application'
+WSGI_APPLICATION = 'crm1.wsgi.application'
 
 
 # Database
@@ -133,20 +129,3 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.google.GoogleOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
-LOGIN_URL = 'login'
-LOGOUT_URL = 'login'
-LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_FACEBOOK_KEY = '1300632967039690'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '2bea3ca503be3cbd9fc1fcc3fabbdeb5'  # App Secret
-
-SOCIAL_AUTH_GITHUB_KEY = '4495600e9de66b807165'
-SOCIAL_AUTH_GITHUB_SECRET = '33bf55570586d52f626eccd0d0a1691e41b6c63f'
