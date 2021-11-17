@@ -1,10 +1,9 @@
-name: Django CI
+name: Django CI push main
 
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
 
 jobs:
   build: #first job - testing
@@ -14,7 +13,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7, 3.8, 3.9]
-
+https://github.com/norbeeek/bui_projekt/settings
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
