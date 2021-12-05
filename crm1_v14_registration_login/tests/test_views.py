@@ -93,22 +93,22 @@ class LoginTest(BaseTest):
         self.assertEqual(response.status_code,302)
 
     def test_login_failed_wrong_credentials(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'test'},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_without_username(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         response = self.client.post(self.login_url, {'username':'', 'password':'test'},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_without_password(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         response = self.client.post(self.login_url, {'username':'TestAccount', 'password':''},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_blank_fields(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         response = self.client.post(self.login_url, {'username':'', 'password':''},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
@@ -124,9 +124,9 @@ class LogoutTest(BaseTest):
 class HomeTest(BaseTest):
 
     def test_access_home_page_after_logging_in(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         self.client.post(self.login_url, {'username': 'TestAccount', 'password': 'Sup3rS3cr3tP4$$w0rd123.'},
-                         format='text/html')
+                         format='text/html', secure=True)
         response = self.client.get(reverse('home'), secure=True)
         self.assertEqual(response.status_code,200)
 
