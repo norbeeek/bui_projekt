@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env(‘SECRET_KEY’)
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -151,8 +151,8 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = 'login'
 LOGOUT_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_FACEBOOK_KEY =  env(‘SOCIAL_AUTH_FACEBOOK_KEY’)# App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = env(‘SOCIAL_AUTH_FACEBOOK_SECRET’)  # App Secret
+SOCIAL_AUTH_FACEBOOK_KEY =  env('SOCIAL_AUTH_FACEBOOK_KEY')# App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = env('SOCIAL_AUTH_FACEBOOK_SECRET')  # App Secret
 
-SOCIAL_AUTH_GITHUB_KEY = env(‘SOCIAL_AUTH_GITHUB_KEY’)
-SOCIAL_AUTH_GITHUB_SECRET = env(‘SOCIAL_AUTH_GITHUB_SECRET’)'
+SOCIAL_AUTH_GITHUB_KEY = env('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = env('SOCIAL_AUTH_GITHUB_SECRET')
