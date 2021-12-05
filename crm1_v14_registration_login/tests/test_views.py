@@ -88,7 +88,7 @@ class LoginTest(BaseTest):
         self.assertTemplateUsed(response,'accounts/login.html')
 
     def test_login_success(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html',secure=True)
         response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'Sup3rS3cr3tP4$$w0rd123.'},format='text/html', secure=True)
         self.assertEqual(response.status_code,302)
 
@@ -115,9 +115,9 @@ class LoginTest(BaseTest):
 class LogoutTest(BaseTest):
 
     def test_logout(self):
-        self.client.post(self.register_url, self.user, format='text/html')
+        self.client.post(self.register_url, self.user, format='text/html', secure=True)
         self.client.post(self.login_url, {'username': 'TestAccount', 'password': 'Sup3rS3cr3tP4$$w0rd123.'},
-                                    format='text/html')
+                                    format='text/html',secure=True)
         response = self.client.get(reverse('logout'), secure=True)
         self.assertEqual(response.status_code,302)
 
