@@ -58,6 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'crm1.urls'
 
+SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
