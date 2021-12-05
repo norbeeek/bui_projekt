@@ -26,11 +26,11 @@ class RegisterTest(BaseTest):
         self.assertTemplateUsed(response,'accounts/register.html')
 
     def test_can_register_user(self):
-        response = self.client.post(self.register_url,self.user,format='text/html')
+        response = self.client.post(self.register_url,self.user,format='text/html', secure=True)
         self.assertEqual(response.status_code,302)
 
     def test_cant_register_user_with_wrong_email(self):
-        response = self.client.post(self.register_url,self.wrong_user,format='text/html')
+        response = self.client.post(self.register_url,self.wrong_user,format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
     def test_cant_register_user_with_not_matching_passwords(self):
@@ -39,7 +39,7 @@ class RegisterTest(BaseTest):
             'username': 'TestAcc',
             'password1': 'Sup11',
             'password2': 'Sup'
-        },format='text/html')
+        },format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
     def test_cant_register_user_with_blank_fields(self):
@@ -48,7 +48,7 @@ class RegisterTest(BaseTest):
             'username': '',
             'password1': '',
             'password2': ''
-        },format='text/html')
+        },format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
     def test_cant_register_user_without_email(self):
@@ -57,7 +57,7 @@ class RegisterTest(BaseTest):
             'username': 'TestAcc',
             'password1': 'Sup11',
             'password2': 'Sup11'
-        },format='text/html')
+        },format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
     def test_cant_register_user_without_username(self):
@@ -66,7 +66,7 @@ class RegisterTest(BaseTest):
             'username': '',
             'password1': 'Sup11',
             'password2': 'Sup11'
-        },format='text/html')
+        },format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
     def test_cant_register_user_without_password_confirm(self):
@@ -75,7 +75,7 @@ class RegisterTest(BaseTest):
             'username': 'TestAcc',
             'password1': 'Sup11',
             'password2': ''
-        },format='text/html')
+        },format='text/html', secure=True)
         self.assertAlmostEqual(response.status_code,200)
 
 
@@ -83,33 +83,33 @@ class RegisterTest(BaseTest):
 class LoginTest(BaseTest):
 
     def test_can_access_page(self):
-        response = self.client.get(self.login_url)
+        response = self.client.get(self.login_url, secure=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,'accounts/login.html')
 
     def test_login_success(self):
         self.client.post(self.register_url, self.user, format='text/html')
-        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'Sup3rS3cr3tP4$$w0rd123.'},format='text/html')
+        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'Sup3rS3cr3tP4$$w0rd123.'},format='text/html', secure=True)
         self.assertEqual(response.status_code,302)
 
     def test_login_failed_wrong_credentials(self):
         self.client.post(self.register_url, self.user, format='text/html')
-        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'test'},format='text/html')
+        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':'test'},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_without_username(self):
         self.client.post(self.register_url, self.user, format='text/html')
-        response = self.client.post(self.login_url, {'username':'', 'password':'test'},format='text/html')
+        response = self.client.post(self.login_url, {'username':'', 'password':'test'},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_without_password(self):
         self.client.post(self.register_url, self.user, format='text/html')
-        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':''},format='text/html')
+        response = self.client.post(self.login_url, {'username':'TestAccount', 'password':''},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_login_failed_blank_fields(self):
         self.client.post(self.register_url, self.user, format='text/html')
-        response = self.client.post(self.login_url, {'username':'', 'password':''},format='text/html')
+        response = self.client.post(self.login_url, {'username':'', 'password':''},format='text/html', secure=True)
         self.assertEqual(response.status_code,200)
 
 class LogoutTest(BaseTest):
@@ -118,7 +118,7 @@ class LogoutTest(BaseTest):
         self.client.post(self.register_url, self.user, format='text/html')
         self.client.post(self.login_url, {'username': 'TestAccount', 'password': 'Sup3rS3cr3tP4$$w0rd123.'},
                                     format='text/html')
-        response = self.client.get(reverse('logout'))
+        response = self.client.get(reverse('logout'), secure=True)
         self.assertEqual(response.status_code,302)
 
 class HomeTest(BaseTest):
@@ -127,9 +127,9 @@ class HomeTest(BaseTest):
         self.client.post(self.register_url, self.user, format='text/html')
         self.client.post(self.login_url, {'username': 'TestAccount', 'password': 'Sup3rS3cr3tP4$$w0rd123.'},
                          format='text/html')
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('home'), secure=True)
         self.assertEqual(response.status_code,200)
 
     def test_access_home_page_without_logging_in(self):
-        response = self.client.get(reverse('home'))
+        response = self.client.get(reverse('home'), secure=True)
         self.assertEqual(response.status_code,302)
