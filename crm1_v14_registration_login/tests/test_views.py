@@ -21,7 +21,7 @@ class BaseTest(TestCase):
 
 class RegisterTest(BaseTest):
     def test_can_view_page_correctly(self):
-        response = self.client.get(self.register_url)
+        response = self.client.get(self.register_url, secure=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,'accounts/register.html')
 
